@@ -4,3 +4,6 @@
 <?php
 sessionDestroy();
 ?>
+
+to pass a id to another page with a link
+<a href="film1.php?id='.$row['id'].'">
