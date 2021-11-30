@@ -129,12 +129,14 @@ return $data;
     function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs)
     {
         include 'db.php';
-        $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', prijs=$prijs where id ='$id'";
+        $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs' where id ='$id'";
         $stmt = $db->prepare($query);
         $stmt->execute();
         var_dump($stmt);
         if($stmt == true){
           echo "Artikel is geupdate <br>";
+        }else{
+            echo" er is een error";
         }
         
     }
