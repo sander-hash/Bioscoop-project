@@ -1,0 +1,6 @@
+<form method="post">
+    <button type="submit" name="destroySession">Uitloggen</button>
+</form>
+<?php
+sessionDestroy();
+?>
