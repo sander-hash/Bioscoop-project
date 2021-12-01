@@ -57,3 +57,6 @@ $password = $_POST['password'];
 login($usernaam, $password);
 }
 ?>
+<?php
+require_once('footer.php')
+?>

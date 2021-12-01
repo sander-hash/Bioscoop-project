@@ -8,7 +8,11 @@
     <title>Document</title>
 </head>
 <?php include_once("navbar.php"); ?>
-<body>
-    
+<body class="flex-col h-screen">
+    <div class="">
+        test
+</div>
 </body>
 </html>
+
+<?php require_once('footer.php');?>

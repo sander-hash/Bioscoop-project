@@ -9,7 +9,7 @@
     <title>Bioscoop</title>
 </head>
 <?php include_once("navbar.php"); ?>
-<body>
+<body class="">
 
 <?php showItemFilm(); ?>
     
@@ -18,3 +18,5 @@
 
 </body>
 </html>
+
+<?php require_once('footer.php');
