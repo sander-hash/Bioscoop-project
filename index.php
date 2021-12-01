@@ -9,7 +9,7 @@
 </head>
 <?php include_once("navbar.php"); ?>
 <body class="flex-col h-screen">
-    <div class="">
+    <div class="flex-col h-screen justify-between">
         test
 </div>
 </body>

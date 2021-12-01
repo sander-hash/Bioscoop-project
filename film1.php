@@ -9,7 +9,7 @@
     <title>Bioscoop</title>
 </head>
 <?php include_once("navbar.php"); ?>
-<body class="">
+<body class="flex-col h-screen justify-between">
 
 <?php showItemFilm(); ?>
     
