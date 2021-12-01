@@ -14,6 +14,9 @@ $description = "";
 $prijs = "";
 $begintijd = "";
 $eindtijd = "";
+$plaatje = "";
+$hoofdrolspeler = "";
+$achtergrondhoofdrolspeler = "";
 $id = '';
 $update = false;
 $updateItem = false;
@@ -29,7 +32,7 @@ if (isset($_POST['btnInvoer'])){
         
 }
 if(isset($_GET['id']) && $_GET['action'] === 'delete'){
-    deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd);
+    deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
     }
 if (isset($_GET['id']) && $_GET['action'] === 'edit'){
    include 'db.php';
@@ -43,6 +46,9 @@ if (isset($_GET['id']) && $_GET['action'] === 'edit'){
     $locatie = $row['locatie'];
     $description = $row['description'];
     $prijs = $row['prijs'];
+    $plaatje = $row['plaatje'];
+    $hoofdrolspeler = $row['hoofdrolspeler'];
+    $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
 }
 if(isset($_POST['btnUpdate'])){
     include 'db.php';
@@ -53,7 +59,10 @@ if(isset($_POST['btnUpdate'])){
     $locatie = $_POST['locatie'];
     $description = $_POST['description'];
     $prijs = $_POST['prijs'];
-    updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs);
+    $plaatje = $_POST['plaatje'];
+    $hoofdrolspeler = $_POST['hoofdrolspeler'];
+    $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
+    updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
 
 }
 
@@ -115,6 +124,24 @@ if(isset($_POST['btnUpdate'])){
         <label for="begintijd">Prijs</label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="number" name="prijs" id="prijs" class="gt-input"
         placeholder="<?php echo $prijs; ?>">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Plaatje</label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="plaatje" id="plaatje" class="gt-input"
+        placeholder="<?php echo $plaatje; ?>">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Hoofdrolspeler</label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="hoofdrolspeler" id="hoofdrolspeler" class="gt-input"
+        placeholder="<?php echo $hoofdrolspeler; ?>">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Achtergrondhoofdrolspeler</label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="achtergrondhoofdrolspeler" id="achtergrondhoofdrolspeler" class="gt-input"
+        placeholder="<?php echo $hoofdrolspeler; ?>">
       </div>
 </div>
 </div>

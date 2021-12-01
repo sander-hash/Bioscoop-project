@@ -44,20 +44,23 @@ function sessionDestroy(){
           $eindtijd = $_POST['eindtijd'];
           $locatie = $_POST['locatie'];
           $prijs = $_POST['prijs'];
+          $plaatje = $_POST['plaatje'];
+          $hoofdrolspeler = $_POST['hoofdrolspeler'];
+          $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
         
         
-          if(empty($film) || empty($begintijd) || empty($eindtijd) || empty($description) || empty($locatie) || empty($prijs)) {
+          if(empty($film) || empty($begintijd) || empty($eindtijd) || empty($description) || empty($locatie) || empty($prijs) || empty($plaatje) || empty($hoofdrolspeler) || empty($achtergrondhoofdrolspeler)) {
             $status = "All fields are compulsory.";
           } else {
             if(strlen($film) >= 255 || !preg_match("/^[a-zA-Z-'\s]+$/", $film)) {
               $status = "Please enter a valid name";
             } else {
         
-              $sql = "INSERT INTO films (film, description, begintijd, eindtijd, locatie, prijs) VALUES (:film, :description, :begintijd, :eindtijd, :locatie, :prijs)";
+              $sql = "INSERT INTO films (film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler) VALUES (:film, :description, :begintijd, :eindtijd, :locatie, :prijs, :plaatje, :hoofdrolspeler, :achtergrondhoofdrolspeler)";
         
               $stmt = $db->prepare($sql);
               
-              $stmt->execute(['film' => $film, 'description' => $description, 'begintijd' => $begintijd, 'eindtijd' => $eindtijd, 'locatie' => $locatie, 'prijs' => $prijs]);
+              $stmt->execute(['film' => $film, 'description' => $description, 'begintijd' => $begintijd, 'eindtijd' => $eindtijd, 'locatie' => $locatie, 'prijs' => $prijs, 'plaatje' => $plaatje, 'hoofdrolspeler' => $hoofdrolspeler, 'achtergrondhoofdrolspeler' => $achtergrondhoofdrolspeler]);
         
               
               $film = "";
@@ -66,6 +69,9 @@ function sessionDestroy(){
               $eindtijd = "";
               $locatie = "";
               $prijs = "";
+              $plaatje = "";
+              $hoofdrolspeler = "";
+              $achtergrondhoofdrolspeler = "";
               
 
 
@@ -90,6 +96,9 @@ function sessionDestroy(){
         <th>eindtijd</th>
         <th>locatie</th>
         <th>prijs</th>
+        <th>plaatje</th>
+        <th>hoofdrolspeler</th>
+        <th>achtergrondhoofdrolspeler</th>
         <th>Edit</th>
         <th>Delete</th>
         </tr>';
@@ -104,6 +113,9 @@ function sessionDestroy(){
             <td>'.$row["eindtijd"].'</td>
             <td>'.$row["locatie"].'</td>
             <td>'.$row["prijs"].'</td>
+            <td>'.$row["plaatje"].'</td>
+            <td>'.$row["hoofdrolspeler"].'</td>
+            <td>'.$row["achtergrondhoofdrolspeler"].'</td>
             <td><a href="?id=' . $row['id'] . '&action=edit"><div style="color:green">Edit</div></a></td>
             <td><a href="?id=' . $row['id'] . '&action=delete"><div style="color:red">Delete</div></a></td>
             </tr>';
@@ -114,7 +126,7 @@ function sessionDestroy(){
 echo '</table>';
 return $data;
     }
-    function deleteItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs){
+    function deleteItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler){
         include 'db.php';
         $id = $_GET['id'];
         $query = "DELETE FROM films where id = $id";
@@ -126,10 +138,10 @@ return $data;
         
     }
 
-    function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs)
+    function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler)
     {
         include 'db.php';
-        $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs' where id ='$id'";
+        $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs', plaatje='$plaatje', hoofdrolspeler='$hoofdrolspeler', achtergrondhoofdrolspeler='$achtergrondhoofdrolspeler' where id ='$id'";
         $stmt = $db->prepare($query);
         $stmt->execute();
         var_dump($stmt);
@@ -142,7 +154,7 @@ return $data;
     }
  
     
-    function showUpdateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $row){
+    function showUpdateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler, $row){
       include 'db.php';
       $update = true;
        $id = $_GET['id'];
@@ -152,6 +164,9 @@ return $data;
        $eindtijd = $row['eindtijd'];
        $locatie = $row['locatie'];
        $prijs = $row['prijs'];
+       $plaatje = $row['plaatje'];
+       $hoofdrolspeler = $row['hoofdrolspeler'];
+       $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
          $query = $db>query("SELECT * FROM films WHERE id=$id");
          $row = $query->fetch();
          
@@ -177,7 +192,7 @@ return $data;
       <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
         <div class="group relative">
           <div class="relative w-full h-80 bg-white rounded-lg overflow-hidden group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-            <img src="https://media.pathe.nl/nocropthumb/275x450/gfx_content/Free-Guy_ps_1_jpg_sd-low_Copyright-2020-Twentieth-Century-Fox-Film-Corporation-All-Rights-Reserved.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
+            <img src="'.$row['plaatje'].'" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="w-full h-full object-center object-cover">
           </div>
           <h3 class="mt-6 text-sm text-gray-500">
             <a href="film1.php?id='.$row['id'].'">
@@ -207,7 +222,7 @@ return $data;
     function showOneFilm(){
         include 'db.php';
         $id = $_GET['id'];
-        $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs FROM films WHERE id = $id";
+        $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
         $stmt = $db->query($query);
         return $stmt;
     }
@@ -222,7 +237,7 @@ return $data;
         <div class="container px-5 py-10 mx-auto flex flex-col">
         <div class="lg:w-4/6 mx-auto">
         <div class="rounded-lg h-100 overflow-hidden">
-        <img alt="content" class="object-cover object-center h-full w-full" src="https://www.moviemeter.nl/afbeeldingen/artikel/1920x1080/ryan-reynolds-komt-met-groot-nieuws-na-succes-free-guy-disney-wil-nu-al-een-vervolg-32531629113153.jpg">
+        <img alt="content" class="object-cover object-center h-full w-full" src="'.$row['plaatje'].'">
         </div>
         <div class="flex flex-col sm:flex-row mt-10">
         <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -233,19 +248,21 @@ return $data;
             </svg>
           </div>
           <div class="flex flex-col items-center text-center justify-center">
-            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">Hoofdrolspeler</h2>
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">'.$row["hoofdrolspeler"].'</h2>
             <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
-            <p class="text-base">Achtergrond van hoofdrolspeler.</p>
+            <p class="text-base">'.$row["achtergrondhoofdrolspeler"].'</p>
           </div>
         </div>
         <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-          <p class="leading-relaxed text-lg mb-4">'.$row["description"].'</p>
-          <a class="text-indigo-500 inline-flex items-center">Learn More
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
+          <p class="leading-relaxed text-lg mb-4">'.$row["description"].'</p><br><br><br><br>
+          
+          Begintijd: '.$row["begintijd"].'<br>
+          Eindtijd: '.$row["eindtijd"].'<br>
+          Locatie: '.$row["locatie"].'<br>
+          Prijs: €'.$row["prijs"].'
+
               
-              
-            </svg>
+            
           </a>
         </div>
         </div>
