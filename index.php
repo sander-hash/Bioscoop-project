@@ -9,6 +9,7 @@
 </head>
 <?php include_once("navbar.php"); ?>
 <body class="flex-col h-screen">
+    <!-- zorgt dat footer onderaan blijft -->
     <div class="flex-col h-screen justify-between">
         test
 </div>
