@@ -1,2 +1,2 @@
 SQLSTATE[HY000] [1044] Access denied for user ''@'localhost' to database 'bioscoop'
-test
+testSQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo failed: nodename nor servname provided, or not known

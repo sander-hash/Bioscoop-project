@@ -1,6 +1,6 @@
 <?php
-$user="sjoerd";
-$pass="MyNewPass4!";
+$user="root";
+$pass="";
 try {
     $db = new PDO('mysql:host=db;dbname=bioscoop', $user, $pass);
 } catch (PDOException $e) {
