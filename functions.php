@@ -2,6 +2,7 @@
 
 function login(){
     include 'db.php';
+
 if (isset($_POST['btnLogin'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -19,8 +20,9 @@ if (isset($_POST['btnLogin'])){
     }else{
         echo "Login is niet correct";
     }
+    }
 }
-}
+
 
 function sessionDestroy(){
     if (isset($_POST['destroySession'])){
@@ -77,14 +79,19 @@ function sessionDestroy(){
 
          
             }
+          
+              
+            }
           }
         
         }
+      
 
        
-    }
+    
 
     function showList(){
+        try{
         include 'db.php';
         $query = "SELECT * FROM films";
         $data = $db->query($query);
@@ -103,6 +110,7 @@ function sessionDestroy(){
         <th>Delete</th>
         </tr>';
 
+        
 
         foreach ($data as $row)
         {
@@ -121,8 +129,11 @@ function sessionDestroy(){
             </tr>';
             
 
-}
-
+       }
+        }catch(Exception $e){
+          error_log($_SESSION, 3, "app_errors.log");
+          die("There was a problem");
+        }
 echo '</table>';
 return $data;
     }
