@@ -1,1 +1,2 @@
 SQLSTATE[HY000] [1044] Access denied for user ''@'localhost' to database 'bioscoop'
+test
