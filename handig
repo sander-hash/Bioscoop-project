@@ -7,3 +7,16 @@ sessionDestroy();
 
 to pass a id to another page with a link
 <a href="film1.php?id='.$row['id'].'">
+
+Git status -> voor status te checken
+Git add -> om het project naar keuze te adden
+Git commit -m “messages” -> om de wijzigingen door te voeren
+Git checkout
+Git push -> om git te pushen naar github
+git push origin <head>:master --force
+Git log
+git pull
+
+Zo maak je het je head->Git checkout “code achter commit bij git log”
+Git push origin <head>:main
+Head vind je bij git status
