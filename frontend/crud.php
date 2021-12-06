@@ -145,12 +145,6 @@ if(isset($_POST['btnUpdate'])){
       </div>
 </div>
 </div>
-
- 
-
-
-
-
       <?php if ($update ==true){ 
                 echo '<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-full" input name="btnUpdate" type="submit" class="gt-button">Film updaten</button>';
       }else{
@@ -169,8 +163,8 @@ if(isset($_POST['btnUpdate'])){
   </div>
   <br>
 <?php
-showList();
-
+$lc = new crudController();
+$lc->showList();
 ?>
 
 <form method="post">

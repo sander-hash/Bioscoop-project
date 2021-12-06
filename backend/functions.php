@@ -22,87 +22,34 @@ class LoginController{
     
     
   public function uitloggen(){
+        require ('db.php');
         if (isset($_POST['destroySession'])){
             session_destroy();
             header("Location:login.php");
             
         }
         }
-      
       }
+    function showOneFilm(){
+      require ('db.php');
+      $id = $_GET['id'];
+      $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
+      $stmt = $db->query($query);
+      return $stmt;
+  }
+      
   
-    function showList(){
-        try{
-        include 'db.php';
-        $query = "SELECT * FROM films";
-        $data = $db->query($query);
-        echo '<table width="70%" border="1" cellpadding="10" cellspacing="10">
-        <tr>
-        <th>Productnaam</th>
-        <th>description</th>
-        <th>begintijd</th>
-        <th>eindtijd</th>
-        <th>locatie</th>
-        <th>prijs</th>
-        <th>plaatje</th>
-        <th>hoofdrolspeler</th>
-        <th>achtergrondhoofdrolspeler</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        </tr>';
-
-        
-
-        foreach ($data as $row)
-        {
-            echo '<tr>
-            <td>'.$row["film"].'</td>
-            <td>'.$row["description"].'</td>
-            <td>'.$row["begintijd"].'</td>
-            <td>'.$row["eindtijd"].'</td>
-            <td>'.$row["locatie"].'</td>
-            <td>'.$row["prijs"].'</td>
-            <td>'.$row["plaatje"].'</td>
-            <td>'.$row["hoofdrolspeler"].'</td>
-            <td>'.$row["achtergrondhoofdrolspeler"].'</td>
-            <td><a href="?id=' . $row['id'] . '&action=edit"><div style="color:green">Edit</div></a></td>
-            <td><a href="?id=' . $row['id'] . '&action=delete"><div style="color:red">Delete</div></a></td>
-            </tr>';
-            
-
-       }
-        }catch(Exception $e){
-          error_log($_SESSION, 3, "app_errors.log");
-          die("There was a problem");
-        }
-echo '</table>';
-return $data;
-    }
-
- 
-    
-    function showUpdateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler, $row){
-      include 'db.php';
-      $update = true;
-       $id = $_GET['id'];
-       $film = $row['film'];
-       $description = $row['description'];
-       $begintijd = $row['begintijd'];
-       $eindtijd = $row['eindtijd'];
-       $locatie = $row['locatie'];
-       $prijs = $row['prijs'];
-       $plaatje = $row['plaatje'];
-       $hoofdrolspeler = $row['hoofdrolspeler'];
-       $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
-         $query = $db>query("SELECT * FROM films WHERE id=$id");
-         $row = $query->fetch();
-         
-    }
+    function showListData(){
+    require ('db.php');
+    $query = "SELECT * FROM films";
+    $stmt = $db->query($query);
+    return $stmt;
+  }  
 
     class showMoviesController{
     public function showItemsIndex(){
-        
-        $item = showListData();
+      require ('db.php');
+      $item = showListData();
       foreach ($item as $row){
         echo '
         
@@ -125,6 +72,7 @@ return $data;
     }
 
     public function showItemFilm(){
+        require ('db.php');
         $item = showOneFilm();
         foreach ($item as $row){
 
@@ -173,28 +121,11 @@ return $data;
     }
     
   }
-  function showOneFilm(){
-    include 'db.php';
-    $id = $_GET['id'];
-    $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
-    $stmt = $db->query($query);
-    return $stmt;
-}
-    
 
-function showListData(){
-  include 'db.php';
-  $query = "SELECT * FROM films";
-  $stmt = $db->query($query);
-  return $stmt;
-}
 
 class crudController{
-
 public function productInvoeren(){
-  include 'db.php';
-
-  
+  require ('db.php');
   if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $film = $_POST['film'];
     $description = $_POST['description'];
@@ -230,16 +161,10 @@ public function productInvoeren(){
         $plaatje = "";
         $hoofdrolspeler = "";
         $achtergrondhoofdrolspeler = "";
-        
-
-
-   
+      
       }
-    
-        
       }
     }
-  
   }
 
   public function deleteItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler){
@@ -256,7 +181,7 @@ public function productInvoeren(){
 
 public function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler)
 {
-    include 'db.php';
+    require ('db.php');
     $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs', plaatje='$plaatje', hoofdrolspeler='$hoofdrolspeler', achtergrondhoofdrolspeler='$achtergrondhoofdrolspeler' where id ='$id'";
     $stmt = $db->prepare($query);
     $stmt->execute();
@@ -268,5 +193,51 @@ public function updateItem($id, $film, $description, $begintijd, $eindtijd, $loc
     }
     
 }
+
+public function showList(){
+  require ('db.php');
+  $query = "SELECT * FROM films";
+  $data = $db->query($query);
+  echo '<table width="70%" border="1" cellpadding="10" cellspacing="10">
+  <tr>
+  <th>Productnaam</th>
+  <th>description</th>
+  <th>begintijd</th>
+  <th>eindtijd</th>
+  <th>locatie</th>
+  <th>prijs</th>
+  <th>plaatje</th>
+  <th>hoofdrolspeler</th>
+  <th>achtergrondhoofdrolspeler</th>
+  <th>Edit</th>
+  <th>Delete</th>
+  </tr>';
+
+  
+
+  foreach ($data as $row)
+  {
+      echo '<tr>
+      <td>'.$row["film"].'</td>
+      <td>'.$row["description"].'</td>
+      <td>'.$row["begintijd"].'</td>
+      <td>'.$row["eindtijd"].'</td>
+      <td>'.$row["locatie"].'</td>
+      <td>'.$row["prijs"].'</td>
+      <td>'.$row["plaatje"].'</td>
+      <td>'.$row["hoofdrolspeler"].'</td>
+      <td>'.$row["achtergrondhoofdrolspeler"].'</td>
+      <td><a href="?id=' . $row['id'] . '&action=edit"><div style="color:green">Edit</div></a></td>
+      <td><a href="?id=' . $row['id'] . '&action=delete"><div style="color:red">Delete</div></a></td>
+      </tr>';
+      
+
+ }
+  
+echo '</table>';
+return $data;
+}
+
+
 }
 ?>
