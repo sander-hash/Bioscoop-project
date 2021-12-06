@@ -35,7 +35,7 @@ if(isset($_GET['id']) && $_GET['action'] === 'delete'){
     deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
     }
 if (isset($_GET['id']) && $_GET['action'] === 'edit'){
-   include 'db.php';
+   require '../backend/db.php';
    $update = true;
     $id = $_GET['id'];
     $query = $db->query("SELECT * FROM films WHERE id=$id");
@@ -51,7 +51,7 @@ if (isset($_GET['id']) && $_GET['action'] === 'edit'){
     $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
 }
 if(isset($_POST['btnUpdate'])){
-    include 'db.php';
+    require '../backend/db.php';
     $id = $_GET['id'];
     $film = $_POST['film'];
     $begintijd = $_POST['begintijd'];
