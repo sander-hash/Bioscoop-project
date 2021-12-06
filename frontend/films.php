@@ -1,4 +1,4 @@
-<?php include('functions.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +8,7 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
+<?php require ('../backend/functions.php');?>
 <?php include_once("navbar.php"); ?>
 <body class="flex-col h-screen justify-between">
 

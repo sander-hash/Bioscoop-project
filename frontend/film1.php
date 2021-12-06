@@ -1,4 +1,4 @@
-<?php include('functions.php'); ?>
+<?php require ('../backend/functions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

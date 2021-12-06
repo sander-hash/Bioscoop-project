@@ -1,5 +1,5 @@
 <?php
-include 'functions.php';
+require ('../backend/functions.php');
 session_start();
 if ($_SESSION['isingelogd'] == 'true'){
 
