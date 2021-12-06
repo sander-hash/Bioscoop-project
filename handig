@@ -20,3 +20,5 @@ git pull
 Zo maak je het je head->Git checkout “code achter commit bij git log”
 Git push origin <head>:main
 Head vind je bij git status
+
+ALTIJD PULL BEFORE PUSH
