@@ -186,7 +186,7 @@ return $data;
     function showListData(){
         include 'db.php';
         $query = "SELECT * FROM films";
-        $stmt = $db->query($query);
+        $stmt = $stmt->query($query);
         return $stmt;
     }
 
