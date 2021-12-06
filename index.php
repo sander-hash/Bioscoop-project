@@ -136,4 +136,4 @@
 </body>
 </html>
 
-<?php require_once('footer.php');?>
+<?php require_once('frontend/footer.php');?>

@@ -8,7 +8,7 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<?php require ('../backend/functions.php');?>
+
 <?php include_once("navbar.php"); ?>
 <body class="flex-col h-screen justify-between">
 
@@ -23,7 +23,11 @@
       <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Hier staan alle films die wij tonen in de bioscoop.</p>
     </div>
     <div class="flex flex-wrap -m-4">
-    <?php showItemsindex();?>
+    <?php   
+    require ('../backend/functions.php');
+    $lc = new showMoviesController();
+    $lc -> showItemsIndex();
+    ?>
     
 </section>
 

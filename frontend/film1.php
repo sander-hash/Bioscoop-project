@@ -9,10 +9,14 @@
     <title>Bioscoop</title>
 </head>
 <?php include_once("navbar.php"); ?>
-<?php require ('../backend/functions.php');?>
+
 <body class="flex-col h-screen justify-between">
 
-<?php showItemFilm(); ?>
+<?php
+require ('../backend/functions.php');
+$lc = new showMoviesController();
+$lc->showItemFilm();
+?>
     
 <button onclick="window.location.href=''" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bestel kaartjes</button>
     

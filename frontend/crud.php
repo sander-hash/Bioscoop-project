@@ -25,14 +25,13 @@ $deleteItem = false;
 
 
 if (isset($_POST['btnInvoer'])){
-    if (productInvoeren())
-        $status = "Product is ingevoerd";
-    else
-        $status = "Product is niet ingevoerd";
-        
+  $lc = new crudController();
+  $lc->productInvoeren();
 }
 if(isset($_GET['id']) && $_GET['action'] === 'delete'){
-    deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
+    require ('../backend/db.php');
+    $lc = new crudController();
+    $lc->deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
     }
 if (isset($_GET['id']) && $_GET['action'] === 'edit'){
    require '../backend/db.php';
@@ -51,7 +50,7 @@ if (isset($_GET['id']) && $_GET['action'] === 'edit'){
     $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
 }
 if(isset($_POST['btnUpdate'])){
-    require '../backend/db.php';
+    require ('../backend/db.php');
     $id = $_GET['id'];
     $film = $_POST['film'];
     $begintijd = $_POST['begintijd'];
@@ -62,7 +61,8 @@ if(isset($_POST['btnUpdate'])){
     $plaatje = $_POST['plaatje'];
     $hoofdrolspeler = $_POST['hoofdrolspeler'];
     $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
-    updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
+    $lc = new crudController();
+    $lc->updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
 
 }
 
@@ -176,7 +176,10 @@ showList();
 <form method="post">
 <button type="submit" name="destroySession">Uitloggen</button><br><br>
 <?php 
-sessionDestroy();
+if(isset($_POST['destroySession'])){
+  $lc = new loginController();
+  $lc->uitloggen();
+}
 ?>
 </body>
 

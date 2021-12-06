@@ -1,14 +1,7 @@
 <?php
 session_start();
-require ('../backend/functions.php');
-
 ?>
-
-
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-
-  
- 
 <div class="min-h-full flex">
   <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
     <div class="mx-auto w-full max-w-sm lg:w-96">
@@ -81,9 +74,11 @@ require ('../backend/functions.php');
 
 <?php
 if(isset($_POST['btnLogin'])){
-$usernaam = $_POST['username'];
+require('../backend/functions.php');
+$username = $_POST['username'];
 $password = $_POST['password'];
-login($usernaam, $password);
+$lc = new LoginController();
+$lc->login($username, $password);
 }
 ?>
 <?php

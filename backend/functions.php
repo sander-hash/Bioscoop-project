@@ -1,95 +1,36 @@
 <?php
+class LoginController{
 
-function login(){
-    include 'db.php';
-
-if (isset($_POST['btnLogin'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $query = "SELECT * FROM login WHERE username = :user AND password = :pass";
-
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':user',$username);
-    $stmt->bindParam(':pass',$password);
-    $stmt->execute();
-    $login = $stmt->fetch(PDO::FETCH_OBJ);
-    if ($login !=null){
-        $_SESSION['isingelogd'] = true;
-        header("Location:index.php");
-    }else{
-        echo "Login is niet correct";
-    }
-    }
-}
-
-
-function sessionDestroy(){
-    if (isset($_POST['destroySession'])){
-        session_destroy();
-        header("Location:login.php");
-        
-    }
-    }
-
-
-
-
-    function productInvoeren(){
-        include 'db.php';
-
-        
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $film = $_POST['film'];
-          $description = $_POST['description'];
-          $begintijd = $_POST['begintijd'];
-          $eindtijd = $_POST['eindtijd'];
-          $locatie = $_POST['locatie'];
-          $prijs = $_POST['prijs'];
-          $plaatje = $_POST['plaatje'];
-          $hoofdrolspeler = $_POST['hoofdrolspeler'];
-          $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
-        
-        
-          if(empty($film) || empty($begintijd) || empty($eindtijd) || empty($description) || empty($locatie) || empty($prijs) || empty($plaatje) || empty($hoofdrolspeler) || empty($achtergrondhoofdrolspeler)) {
-            $status = "All fields are compulsory.";
-          } else {
-            if(strlen($film) >= 255 || !preg_match("/^[a-zA-Z-'\s]+$/", $film)) {
-              $status = "Please enter a valid name";
-            } else {
-        
-              $sql = "INSERT INTO films (film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler) VALUES (:film, :description, :begintijd, :eindtijd, :locatie, :prijs, :plaatje, :hoofdrolspeler, :achtergrondhoofdrolspeler)";
-        
-              $stmt = $db->prepare($sql);
-              
-              $stmt->execute(['film' => $film, 'description' => $description, 'begintijd' => $begintijd, 'eindtijd' => $eindtijd, 'locatie' => $locatie, 'prijs' => $prijs, 'plaatje' => $plaatje, 'hoofdrolspeler' => $hoofdrolspeler, 'achtergrondhoofdrolspeler' => $achtergrondhoofdrolspeler]);
-        
-              
-              $film = "";
-              $description = "";
-              $begintijd = "";
-              $eindtijd = "";
-              $locatie = "";
-              $prijs = "";
-              $plaatje = "";
-              $hoofdrolspeler = "";
-              $achtergrondhoofdrolspeler = "";
-              
-
-
-         
-            }
-          
-              
-            }
-          }
-        
+  public function login($username, $password){
+    require ('db.php');
+      
+        $query = "SELECT * FROM login WHERE username = :user AND password = :pass";
+    
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user',$username);
+        $stmt->bindParam(':pass',$password);
+        $stmt->execute();
+        $login = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($login !=null){
+            $_SESSION['isingelogd'] = true;
+            header("Location:../index.php");
+        }else{
+            echo "Login is niet correct";
+        }
+        }
+    
+    
+    
+  public function uitloggen(){
+        if (isset($_POST['destroySession'])){
+            session_destroy();
+            header("Location:login.php");
+            
+        }
         }
       
-
-       
-    
-
+      }
+  
     function showList(){
         try{
         include 'db.php';
@@ -137,32 +78,7 @@ function sessionDestroy(){
 echo '</table>';
 return $data;
     }
-    function deleteItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler){
-        include 'db.php';
-        $id = $_GET['id'];
-        $query = "DELETE FROM films where id = $id";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        if($stmt == true){
-          echo "Artikel is verwijderd <br>";
-        }
-        
-    }
 
-    function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler)
-    {
-        include 'db.php';
-        $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs', plaatje='$plaatje', hoofdrolspeler='$hoofdrolspeler', achtergrondhoofdrolspeler='$achtergrondhoofdrolspeler' where id ='$id'";
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        var_dump($stmt);
-        if($stmt == true){
-          echo "Artikel is geupdate <br>";
-        }else{
-            echo" er is een error";
-        }
-        
-    }
  
     
     function showUpdateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler, $row){
@@ -183,14 +99,8 @@ return $data;
          
     }
 
-    function showListData(){
-        include 'db.php';
-        $query = "SELECT * FROM films";
-        $stmt = $db->query($query);
-        return $stmt;
-    }
-
-    function showItemsIndex(){
+    class showMoviesController{
+    public function showItemsIndex(){
         
         $item = showListData();
       foreach ($item as $row){
@@ -214,19 +124,7 @@ return $data;
 
     }
 
-
-
-
-    function showOneFilm(){
-        include 'db.php';
-        $id = $_GET['id'];
-        $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
-        $stmt = $db->query($query);
-        return $stmt;
-    }
-
-
-    function showItemFilm(){
+    public function showItemFilm(){
         $item = showOneFilm();
         foreach ($item as $row){
 
@@ -274,9 +172,101 @@ return $data;
       }
     }
     
-
-
+  }
+  function showOneFilm(){
+    include 'db.php';
+    $id = $_GET['id'];
+    $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
+    $stmt = $db->query($query);
+    return $stmt;
+}
     
 
+function showListData(){
+  include 'db.php';
+  $query = "SELECT * FROM films";
+  $stmt = $db->query($query);
+  return $stmt;
+}
 
+class crudController{
+
+public function productInvoeren(){
+  include 'db.php';
+
+  
+  if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $film = $_POST['film'];
+    $description = $_POST['description'];
+    $begintijd = $_POST['begintijd'];
+    $eindtijd = $_POST['eindtijd'];
+    $locatie = $_POST['locatie'];
+    $prijs = $_POST['prijs'];
+    $plaatje = $_POST['plaatje'];
+    $hoofdrolspeler = $_POST['hoofdrolspeler'];
+    $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
+  
+  
+    if(empty($film) || empty($begintijd) || empty($eindtijd) || empty($description) || empty($locatie) || empty($prijs) || empty($plaatje) || empty($hoofdrolspeler) || empty($achtergrondhoofdrolspeler)) {
+      $status = "All fields are compulsory.";
+    } else {
+      if(strlen($film) >= 255 || !preg_match("/^[a-zA-Z-'\s]+$/", $film)) {
+        $status = "Please enter a valid name";
+      } else {
+  
+        $sql = "INSERT INTO films (film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler) VALUES (:film, :description, :begintijd, :eindtijd, :locatie, :prijs, :plaatje, :hoofdrolspeler, :achtergrondhoofdrolspeler)";
+  
+        $stmt = $db->prepare($sql);
+        
+        $stmt->execute(['film' => $film, 'description' => $description, 'begintijd' => $begintijd, 'eindtijd' => $eindtijd, 'locatie' => $locatie, 'prijs' => $prijs, 'plaatje' => $plaatje, 'hoofdrolspeler' => $hoofdrolspeler, 'achtergrondhoofdrolspeler' => $achtergrondhoofdrolspeler]);
+  
+        
+        $film = "";
+        $description = "";
+        $begintijd = "";
+        $eindtijd = "";
+        $locatie = "";
+        $prijs = "";
+        $plaatje = "";
+        $hoofdrolspeler = "";
+        $achtergrondhoofdrolspeler = "";
+        
+
+
+   
+      }
+    
+        
+      }
+    }
+  
+  }
+
+  public function deleteItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler){
+    include 'db.php';
+    $id = $_GET['id'];
+    $query = "DELETE FROM films where id = $id";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    if($stmt == true){
+      echo "Artikel is verwijderd <br>";
+    }
+    
+}
+
+public function updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler)
+{
+    include 'db.php';
+    $query = "UPDATE films SET film='$film', description='$description', begintijd='$begintijd', eindtijd='$eindtijd', locatie='$locatie', prijs='$prijs', plaatje='$plaatje', hoofdrolspeler='$hoofdrolspeler', achtergrondhoofdrolspeler='$achtergrondhoofdrolspeler' where id ='$id'";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    var_dump($stmt);
+    if($stmt == true){
+      echo "Artikel is geupdate <br>";
+    }else{
+        echo" er is een error";
+    }
+    
+}
+}
 ?>
