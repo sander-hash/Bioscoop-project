@@ -72,6 +72,7 @@ session_start();
               $lc = new LoginController();
               $lc->login($username, $password);
               }
+              
               ?>
             </div>
           </form>

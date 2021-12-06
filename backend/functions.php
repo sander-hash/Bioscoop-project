@@ -2,8 +2,7 @@
 class LoginController{
 
   public function login($username, $password){
-    require ('db.php');
-      
+    require ('db.php'); 
         $query = "SELECT * FROM login WHERE username = :user AND password = :pass";
     
         $stmt = $db->prepare($query);
@@ -17,10 +16,7 @@ class LoginController{
         }else{
           echo "Login failed";
         }
-        }
-    
-    
-    
+      }
   public function uitloggen(){
         require ('db.php');
         if (isset($_POST['destroySession'])){
