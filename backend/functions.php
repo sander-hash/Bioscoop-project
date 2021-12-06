@@ -15,7 +15,7 @@ class LoginController{
             $_SESSION['isingelogd'] = true;
             header("Location:../index.php");
         }else{
-            echo "Login is niet correct";
+          echo "Login failed";
         }
         }
     
