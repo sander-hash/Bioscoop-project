@@ -1,4 +1,4 @@
-<?php require ('../backend/functions.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +9,12 @@
     <title>Bioscoop</title>
 </head>
 <?php include_once("navbar.php"); ?>
+<?php require ('../backend/functions.php');?>
 <body class="flex-col h-screen justify-between">
 
 <?php showItemFilm(); ?>
     
-<button onclick="window.location.href='betalenfilm1'" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bestel kaartjes</button>
+<button onclick="window.location.href=''" class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Bestel kaartjes</button>
     
 
 </body>
