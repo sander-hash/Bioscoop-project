@@ -22,10 +22,10 @@ class LoginController{
         }
       }
   public function uitloggen(){
-        require ('db.php');
+        
         if (isset($_POST['destroySession'])){
             session_destroy();
-            header("Location:login.php");
+            header("Location:frontend/login.php");
             
         }
         }

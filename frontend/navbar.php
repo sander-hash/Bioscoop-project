@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start();?>
+
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -31,11 +32,25 @@
               <a href="/Bp-Project-Bioscoop/frontend/contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
               <?php if (isset($_SESSION['isingelogd'])){
                 if($_SESSION['isingelogd'] == true){
-                  echo '<a href="/Bp-Project-Bioscoop/frontend/crud.php" class="text-gray-300 hover:bg-gray-700 px3 py-2 rounded-md text-sm font-medium">Crud</a>';
+                  echo '<a href="/Bp-Project-Bioscoop/frontend/crud.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Crud</a>';
                 }
               }
-              
               ?>
+                <?php if (isset($_SESSION['isingelogd'])){
+                if($_SESSION['isingelogd'] == true){
+                  echo '<form method="post">
+                  <button type="submit" name="destroySession" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Uitloggen</button>';
+                }
+                }
+                if(isset($_POST['destroySession'])){
+                  require('backend/loginController.php');
+                  $lc =  new loginController();
+                  $lc->uitloggen();
+                }
+                
+                ?>
+              
+
   
             </div>
           </div>
