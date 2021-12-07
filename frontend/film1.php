@@ -13,7 +13,7 @@
 <body class="flex-col h-screen justify-between">
 
 <?php
-require ('../backend/functions.php');
+require ('../backend/showMoviesController.php');
 $lc = new showMoviesController();
 $lc->showItemFilm();
 ?>

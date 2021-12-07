@@ -7,7 +7,7 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>De Smikkel Bioscoop</title>
 </head>
-<?php include_once("frontend/indexnavbar.php"); ?>
+<?php include_once("frontend/navbar.php"); ?>
 
 <body class="flex-col h-screen">
     

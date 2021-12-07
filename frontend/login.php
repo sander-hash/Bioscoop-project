@@ -66,7 +66,7 @@ session_start();
               <br>
               <?php
               if(isset($_POST['btnLogin'])){
-              require('../backend/functions.php');
+              require('../backend/loginController.php');
               $username = $_POST['username'];
               $password = $_POST['password'];
               $lc = new LoginController();

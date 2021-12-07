@@ -24,7 +24,7 @@
     </div>
     <div class="flex flex-wrap -m-4">
     <?php   
-    require ('../backend/functions.php');
+    require ('../backend/showMoviesController.php');
     $lc = new showMoviesController();
     $lc -> showItemsIndex();
     ?>

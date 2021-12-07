@@ -1,5 +1,5 @@
 <?php
-require ('../backend/functions.php');
+require ('../backend/crudController.php');
 session_start();
 if ($_SESSION['isingelogd'] == 'true'){
 
@@ -25,6 +25,7 @@ $deleteItem = false;
 
 
 if (isset($_POST['btnInvoer'])){
+
   $lc = new crudController();
   $lc->productInvoeren();
 }
@@ -171,6 +172,7 @@ $lc->showList();
 <button type="submit" name="destroySession">Uitloggen</button><br><br>
 <?php 
 if(isset($_POST['destroySession'])){
+  require('../backend/loginController.php');
   $lc = new loginController();
   $lc->uitloggen();
 }
