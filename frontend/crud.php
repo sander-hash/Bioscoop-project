@@ -168,15 +168,7 @@ $lc = new crudController();
 $lc->showList();
 ?>
 
-<form method="post">
-<button type="submit" name="destroySession">Uitloggen</button><br><br>
-<?php 
-if(isset($_POST['destroySession'])){
-  require('../backend/loginController.php');
-  $lc = new loginController();
-  $lc->uitloggen();
-}
-?>
+
 </body>
 
 </html>

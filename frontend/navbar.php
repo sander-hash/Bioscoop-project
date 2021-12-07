@@ -41,13 +41,15 @@
                   echo '<form method="post">
                   <button type="submit" name="destroySession" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Uitloggen</button>';
                 }
+                }else{
+                  echo '<a href="/Bp-Project-Bioscoop/frontend/login.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Inloggen</a>';
                 }
+                
                 if(isset($_POST['destroySession'])){
                   require('backend/loginController.php');
                   $lc =  new loginController();
                   $lc->uitloggen();
                 }
-                
                 ?>
               
 
