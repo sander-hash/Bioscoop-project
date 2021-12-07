@@ -6,8 +6,6 @@
       $stmt = $db->query($query);
       return $stmt;
   }
-      
-  
     function showListData(){
     require ('db.php');
     $query = "SELECT * FROM films";
