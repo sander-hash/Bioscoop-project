@@ -1,5 +1,4 @@
 <?php session_start();?>
-
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -46,7 +45,7 @@
                 }
                 
                 if(isset($_POST['destroySession'])){
-                  require('backend/loginController.php');
+                  require('../backend/loginController.php');
                   $lc =  new loginController();
                   $lc->uitloggen();
                 }

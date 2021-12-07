@@ -16,7 +16,7 @@ class LoginController{
         $login = $stmt->fetch(PDO::FETCH_OBJ);
         if ($login !=null){
             $_SESSION['isingelogd'] = true;
-            header("Location:../index.php");
+            header("Location:/Bp-Project-Bioscoop/index.php");
         }else{
           echo "Login failed";
         }
@@ -25,7 +25,7 @@ class LoginController{
         
         if (isset($_POST['destroySession'])){
             session_destroy();
-            header("Location:frontend/login.php");
+            header("Location:/Bp-Project-Bioscoop/frontend/login.php");
             
         }
         }

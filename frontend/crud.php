@@ -1,6 +1,6 @@
 <?php
+require_once ('navbar.php');
 require ('../backend/crudController.php');
-session_start();
 if ($_SESSION['isingelogd'] == 'true'){
 
 }else{
