@@ -32,6 +32,7 @@
               <?php if (isset($_SESSION['isingelogd'])){
                 if($_SESSION['isingelogd'] == true){
                   echo '<a href="/Bp-Project-Bioscoop/frontend/crud.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Crud</a>';
+                  echo '<a href="/Bp-Project-Bioscoop/frontend/users.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Users</a>';
                 }
               }
               ?>
