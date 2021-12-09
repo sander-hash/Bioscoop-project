@@ -1,6 +1,5 @@
 <?php
 require_once ('navbar.php');
-require ('../backend/functions.php');
 ?>
 
 

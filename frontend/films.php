@@ -1,4 +1,6 @@
 
+<?php include_once("navbar.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +11,6 @@
     <title>Document</title>
 </head>
 
-<?php include_once("navbar.php"); ?>
 <body class="flex-col h-screen justify-between">
 
 
