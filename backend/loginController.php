@@ -17,7 +17,8 @@ class LoginController{
           $login = $stmt->fetch(PDO::FETCH_OBJ);
 
           if(password_verify($password, $login->password)){
-            header("Location:/Bp-Project-Bioscoop/frontend/index.php");
+            header("Location:/Bp-Project-Bioscoop/index.php");
+            $_SESSION['isingelogd'] = true;
           }else{
             echo "het wachtwoord is fout";
           }

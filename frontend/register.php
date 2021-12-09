@@ -1,5 +1,13 @@
 <?php
+$error = "";
 session_start();
+if($_SESSION['isingelogd'] == true){
+  
+}else{
+  header("Location:/Bp-Project-Bioscoop/index.php");
+}
+  
+
 ?>
 
 
@@ -20,7 +28,7 @@ session_start();
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <label for="username" class="sr-only">Username</label>
-          <input id="username" name="username" type="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+          <input id="username" name="username" type="username" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username">
         </div>
         <div>
           <label for="password" class="sr-only">Password</label>
@@ -56,21 +64,23 @@ session_start();
           Register
         </button>
         
+        <?php
+        if(isset($_POST['btnRegister'])){
+          require ('../backend/registerController.php');
+          $username = $_POST['username'];
+          $password = $_POST['password'];
+          $lc = new registerController();
+          $lc->register($username, $password);
+        
+        }
+        ?>
       </div>
       
     </form>
   </div>
 </div>
-  <?php
-              if(isset($_POST['btnRegister'])){
-              require('../backend/registerController.php');
-              $username = $_POST['username'];
-              $password = $_POST['password'];
-              $lc = new registerController();
-              $lc->register($username, $password);
-              }
-              
-              ?>
 <?php
+
+
 require_once('footer.php')
 ?>
