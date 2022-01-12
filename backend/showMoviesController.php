@@ -21,7 +21,7 @@
         </div>
       </div>
     
-  
+        
         ';
 
       }
@@ -62,7 +62,7 @@
           Eindtijd: '.$row["eindtijd"].'<br>
           Locatie: '.$row["locatie"].'<br>
           Prijs: €'.$row["prijs"].'
-
+          
               
             
           </a>
@@ -72,11 +72,91 @@
         </div>
         </section>
         
+        <br>
+        
+        <a class="flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="betaalpagina.php?id='.$row['id'].'">Bestel kaartjes</a>
         
         ';
 
       }
     }
+
+    public function showMoviesIndex(){
+      require ('functions.php');
+      $item = showMovie();
+      foreach ($item as $row){
+      echo'
+      Film: '.$row['film'].'
+      <br>
+      Zaal: '.$row['zaal'].'
+      <div>
+            <label class="block text-sm">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              placeholder="Vul hier je e-mail in" required/>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm">
+              Voornaam
+            </label>
+            <input 
+              name="voornaam"
+              type="text"
+              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              placeholder="Vul hier je voornaam in" required />
+          </div>
+          <div>
+            <label class="block mt-4 text-sm">
+              Achternaam
+            </label>
+            <input
+              name="achternaam"
+              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              placeholder="Vul hier je achternaam" required/>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm">
+              Aantal kaartjes
+            </label>
+            <input 
+             name="kaartjes"
+              type="text"
+              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              placeholder="Gewenste hoeveelheid kaartjes" required/>
+          </div>
+          <div class="mt-4">
+            <label class="block text-sm">
+              Stoelkeuze
+            </label>
+            <input
+              name="stoelkeuze"
+              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              placeholder="Gewenste stoel" required/>
+          </div>
+
+          <br>
+          <span class="title-font font-medium text-2xl text-gray-900">€'.$row['prijs'].' per kaartje </span>
+          <button
+            name="submit"
+            class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+            href="#">
+            Naar betalen
+          </button>
+          
+         
+
+        </div>
+      ';
+
+
+      
+
+    }
+  }
     
   }
   ?>

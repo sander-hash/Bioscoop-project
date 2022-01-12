@@ -2,7 +2,7 @@
     function showOneFilm(){
       require ('db.php');
       $id = $_GET['id'];
-      $query = "SELECT film, description, begintijd, eindtijd, locatie, prijs, plaatje, hoofdrolspeler, achtergrondhoofdrolspeler FROM films WHERE id = $id";
+      $query = "SELECT * FROM films WHERE id = $id";
       $stmt = $db->query($query);
       return $stmt;
   }
@@ -12,4 +12,13 @@
     $stmt = $db->query($query);
     return $stmt;
   }  
+
+  function showMovie(){
+    require ('db.php');
+    $id = $_GET['id'];
+    $query = "SELECT * FROM films where id = $id";
+    $stmt = $db->query($query);
+    return $stmt; 
+    
+  }
 ?>

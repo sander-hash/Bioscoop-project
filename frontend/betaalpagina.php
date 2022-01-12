@@ -42,67 +42,13 @@ require '../vendor/autoload.php';
           <h1 class="mb-5 text-2xl font-bold text-center text-gray-700">
             Bestelling plaatsen
           </h1>
-          <div>
-            <label class="block text-sm">
-              Email
-            </label>
-            <input
-              name="email"
-              type="email"
-              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-              placeholder="Vul hier je e-mail in" required/>
-          </div>
-          <div class="mt-4">
-            <label class="block text-sm">
-              Voornaam
-            </label>
-            <input 
-              name="voornaam"
-              type="text"
-              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-              placeholder="Vul hier je voornaam in" required />
-          </div>
-          <div>
-            <label class="block mt-4 text-sm">
-              Achternaam
-            </label>
-            <input
-              name="achternaam"
-              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-              placeholder="Vul hier je achternaam" required/>
-          </div>
-          <div class="mt-4">
-            <label class="block text-sm">
-              Aantal kaartjes
-            </label>
-            <input 
-             name="kaartjes"
-              type="text"
-              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-              placeholder="Gewenste hoeveelheid kaartjes" required/>
-          </div>
-          <div class="mt-4">
-            <label class="block text-sm">
-              Stoelkeuze
-            </label>
-            <input
-              name="stoelkeuze"
-              class="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
-              placeholder="Gewenste stoel" required/>
-          </div>
+          <?php
+          require ('../backend/showMoviesController.php');
+          $lc = new showMoviesController();
+          $lc->showMoviesIndex();
 
-          <br>
-          <span class="title-font font-medium text-2xl text-gray-900">€10 per kaartje </span>
-          <button
-            name="submit"
-            class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-            href="#">
-            Naar betalen
-          </button>
-          
-         
+          ?>
 
-        </div>
       </div>
     </div>
   </div>
