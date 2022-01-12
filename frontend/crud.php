@@ -17,6 +17,7 @@ $eindtijd = "";
 $plaatje = "";
 $hoofdrolspeler = "";
 $achtergrondhoofdrolspeler = "";
+$zaal = "";
 $id = '';
 $update = false;
 $updateItem = false;
@@ -32,7 +33,7 @@ if (isset($_POST['btnInvoer'])){
 if(isset($_GET['id']) && $_GET['action'] === 'delete'){
     require ('../backend/db.php');
     $lc = new crudController();
-    $lc->deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
+    $lc->deleteItem($id, $film, $locatie, $description, $prijs, $begintijd, $eindtijd, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler, $zaal);
     }
 if (isset($_GET['id']) && $_GET['action'] === 'edit'){
    require '../backend/db.php';
@@ -49,6 +50,7 @@ if (isset($_GET['id']) && $_GET['action'] === 'edit'){
     $plaatje = $row['plaatje'];
     $hoofdrolspeler = $row['hoofdrolspeler'];
     $achtergrondhoofdrolspeler = $row['achtergrondhoofdrolspeler'];
+    $zaal = $row['zaal'];
 }
 if(isset($_POST['btnUpdate'])){
     require ('../backend/db.php');
@@ -62,8 +64,9 @@ if(isset($_POST['btnUpdate'])){
     $plaatje = $_POST['plaatje'];
     $hoofdrolspeler = $_POST['hoofdrolspeler'];
     $achtergrondhoofdrolspeler = $_POST['achtergrondhoofdrolspeler'];
+    $zaal = $_POST['zaal'];
     $lc = new crudController();
-    $lc->updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler);
+    $lc->updateItem($id, $film, $description, $begintijd, $eindtijd, $locatie, $prijs, $plaatje, $hoofdrolspeler, $achtergrondhoofdrolspeler, $zaal);
 
 }
 
@@ -143,6 +146,12 @@ if(isset($_POST['btnUpdate'])){
         <label for="description">Achtergrondhoofdrolspeler</label>
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="achtergrondhoofdrolspeler" id="achtergrondhoofdrolspeler" class="gt-input"
         placeholder="<?php echo $hoofdrolspeler; ?>">
+      </div>
+</div>
+<div class="form-group">
+        <label for="description">Zaal</label>
+        <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" name="zaal" id="zaal" class="gt-input"
+        placeholder="<?php echo $zaal; ?>">
       </div>
 </div>
 </div>

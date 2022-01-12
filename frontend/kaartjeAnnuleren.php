@@ -7,8 +7,12 @@ if ($_SESSION['isingelogd'] == true){
 }
 
 $id = "";
-$username = "";
-$password = "";
+$email = "";
+$voornaam = "";
+$achternaam = "";
+$stoelkeuze = "";
+$kaartjes = "";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,16 +26,16 @@ $password = "";
 </head>
 <body class="flex-col h-screen">
     <?php 
-    require ('../backend/userController.php');
-    $lc = new userController();
-    $lc->showUsers();
+    require ('../backend/ticketsController.php');
+    $lc = new ticketsController();
+    $lc->showTickets();
     ?>
     <?php 
     if(isset($_GET['id']) && $_GET['action'] === 'delete'){
-        $lc = new userController();
-        $lc->deleteUser($id, $username, $password);
+        $lc = new ticketsController();
+        $lc->deleteTicket($id, $email, $voornaam, $achternaam, $stoelkeuze, $kaartjes);
         echo '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <strong class="font-bold">User deleted!</strong>
+        <strong class="font-bold">Kaartje geanulleerd!</strong>
         <span class="block sm:inline"> </span>
       </div>';
     }

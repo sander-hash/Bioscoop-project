@@ -10,7 +10,7 @@ if($_SESSION['isingelogd'] == true){
 
 ?>
 
-
+<body class="flex-col h-screen justify-between">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-md w-full space-y-8">
@@ -63,22 +63,22 @@ if($_SESSION['isingelogd'] == true){
           </span>
           Register
         </button>
-        
-        <?php
-        if(isset($_POST['btnRegister'])){
-          require ('../backend/registerController.php');
-          $username = $_POST['username'];
-          $password = $_POST['password'];
-          $lc = new registerController();
-          $lc->register($username, $password);
-        
-        }
-        ?>
+       <?php
+       if(isset($_POST['btnRegister'])){
+         $username = $_POST['username'];
+         $password = $_POST['password'];
+         require('../backend/registerController.php');
+         $lc = new registerController();
+         $lc ->register($username, $password);
+       }
+      ?>
+
       </div>
       
     </form>
   </div>
 </div>
+      </body>
 <?php
 
 

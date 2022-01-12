@@ -36,9 +36,7 @@ class userController{
         $query = "DELETE FROM login where id = $id";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        if($stmt == true){
-          echo "Artikel is verwijderd <br>";
-        }
+
       }  
 } 
 
