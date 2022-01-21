@@ -1,4 +1,6 @@
+
 <?php session_start();?>
+<? $username = ($_SESSION["klantid"]);?>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -34,6 +36,16 @@
                   echo '<a href="/Bp-Project-Bioscoop/frontend/crud.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Crud</a>';
                   echo '<a href="/Bp-Project-Bioscoop/frontend/users.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Users</a>';
                   echo '<a href="/Bp-Project-Bioscoop/frontend/kaartjeAnnuleren.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Reserveringen</a>';
+                }
+              }
+              
+              ?>
+                            <?php if (isset($_SESSION['klantLogin'])){
+                if($_SESSION['klantLogin'] == true){
+                  require("../backend/db.php");
+                  $row = $db->query( "SELECT id from klantLogin where username = '$username'" )->fetch();
+                  $id = $row["id"];
+                  echo '<a href="/Bp-Project-Bioscoop/frontend/klantReservingen.php?id='.$row['id'].'" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Reserveringen</a>';
                 }
               }
               ?>

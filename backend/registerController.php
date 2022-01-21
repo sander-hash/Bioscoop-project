@@ -23,6 +23,25 @@ class registerController{
         }
 
     }
+
+    public function klantRegister($username, $password){
+        $query = "SELECT * FROM klantLogin WHERE username = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$username]);
+        $result = $stmt->rowCount();
+        if($result > 0){
+            echo "Deze usernaam bestaat al";
+    
+        }else{
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        $query = "INSERT INTO Klantlogin(username, password) VALUES (:username, :password)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(['username' => $username, 'password' => $password]);
+        header("Location:/Bp-Project-Bioscoop/index.php");
+        
+        }
+
+    }
 }
 
 

@@ -1,4 +1,7 @@
 <?php session_start();?>
+<? $username = ($_SESSION["klantid"]);?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +49,17 @@
                 }
               }
               ?>
+                                          <?php if (isset($_SESSION['klantLogin'])){
+                if($_SESSION['klantLogin'] == true){
+                  require("backend/db.php");
+                  $row = $db->query( "SELECT id from klantLogin where username = '$username'" )->fetch();
+                  $id = $row["id"];
+
+                  
+                  echo '<a href="/Bp-Project-Bioscoop/frontend/klantReservingen.php?id='.$id.'" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"">Reserveringen</a>';
+                }
+              }
+              ?>
                 <?php if (isset($_SESSION['isingelogd'])){
                 if($_SESSION['isingelogd'] == true){
                   echo '<form method="post">
@@ -78,8 +92,17 @@
       </div>
     </div>
   </nav>
+<?php echo 'Welkom ' .$username;?>
+<br>
+  <?php
+
+        
+
+
+        
+
+?> 
 <body class="flex-col h-screen">
-    
         <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto">
                 <div class="text-center mb-20">

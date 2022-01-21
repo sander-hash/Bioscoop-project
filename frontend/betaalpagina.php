@@ -12,6 +12,9 @@ require '../vendor/PHPMailer/phpmailer/src/SMTP.php';
 require '../vendor/autoload.php';
 
 ?>
+<?php session_start();?>
+<? $username = ($_SESSION["klantid"]);?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +76,11 @@ if(isset($_POST['submit'])){
     $achternaam = $_POST['achternaam'];
     $stoelkeuze = $_POST['stoelkeuze'];
     $kaartjes = $_POST['kaartjes'];
-
+    require("../backend/db.php");
+    $row = $db->query( "SELECT id from klantLogin where username = '$username'" )->fetch();
+    $id = $row["id"];
+    
+    
 
 
     $mail = new PHPMailer(true);
@@ -107,7 +114,7 @@ if(isset($_POST['submit'])){
 
         require('../backend/ticketsController.php');
         $lc = new ticketsController();
-        $lc ->ticket($email, $voornaam, $achternaam, $kaartjes, $stoelkeuze);
+        $lc ->ticket($email, $voornaam, $achternaam, $kaartjes, $stoelkeuze, $id);
 
        
 
