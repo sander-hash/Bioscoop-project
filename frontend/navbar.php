@@ -1,6 +1,10 @@
 
 <?php session_start();?>
-<? $username = ($_SESSION["klantid"]);?>
+<?php
+if (isset($_SESSION['klantid'])){
+$username = ($_SESSION["klantid"]);
+}
+?>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <nav class="bg-gray-800">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -49,14 +53,15 @@
                 }
               }
               ?>
-                <?php if (isset($_SESSION['isingelogd'])){
-                if($_SESSION['isingelogd'] == true){
+                <?php if (isset($_SESSION['klantid']) || isset($_SESSION['isingelogd'])){
+                if($_SESSION['klantid'] || $_SESSION['isingelogd'] == true){
                   echo '<form method="post">
                   <button type="submit" name="destroySession" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Uitloggen</button>';
                 }
                 }else{
                   echo '<a href="/Bp-Project-Bioscoop/frontend/login.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Inloggen</a>';
                 }
+                
                 
                 if(isset($_POST['destroySession'])){
                   require('../backend/loginController.php');

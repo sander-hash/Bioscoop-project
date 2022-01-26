@@ -13,7 +13,12 @@ require '../vendor/autoload.php';
 
 ?>
 <?php session_start();?>
-<? $username = ($_SESSION["klantid"]);?>
+<?php
+if (isset($_SESSION['klantid'])){
+$username = ($_SESSION["klantid"]);
+}
+?>  
+
 
 
 <!DOCTYPE html>
@@ -79,6 +84,8 @@ if(isset($_POST['submit'])){
     require("../backend/db.php");
     $row = $db->query( "SELECT id from klantLogin where username = '$username'" )->fetch();
     $id = $row["id"];
+    
+
     
     
 

@@ -1,5 +1,9 @@
 <?php session_start();?>
-<? $username = ($_SESSION["klantid"]);?>
+<?php
+if (isset($_SESSION['klantid'])){
+$username = ($_SESSION["klantid"]);
+}
+?>
 
 
 <!DOCTYPE html>
@@ -49,7 +53,7 @@
                 }
               }
               ?>
-                                          <?php if (isset($_SESSION['klantLogin'])){
+                <?php if (isset($_SESSION['klantLogin'])){
                 if($_SESSION['klantLogin'] == true){
                   require("backend/db.php");
                   $row = $db->query( "SELECT id from klantLogin where username = '$username'" )->fetch();
@@ -60,8 +64,8 @@
                 }
               }
               ?>
-                <?php if (isset($_SESSION['isingelogd'])){
-                if($_SESSION['isingelogd'] == true){
+                <?php if (isset($_SESSION['klantid']) || isset($_SESSION['isingelogd'])){
+                if($_SESSION['klantid'] || $_SESSION['isingelogd'] == true){
                   echo '<form method="post">
                   <button type="submit" name="destroySession" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium origin-top-right absolute right-0">Uitloggen</button>';
                 }
@@ -92,7 +96,11 @@
       </div>
     </div>
   </nav>
-<?php echo 'Welkom ' .$username;?>
+  <?php
+  if (isset($_SESSION['klantid'])){
+  echo 'Welkom ' .$username;
+  }
+  ?>
 <br>
   <?php
 
